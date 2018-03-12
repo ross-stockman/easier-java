@@ -1,0 +1,10 @@
+<person>
+	<name>bill</name>
+	<age>1</age>
+	<active>true</active>
+	<sports>
+		<sport>football</sport>
+		<sport>baseball</sport>
+	</sports>
+	<friend />
+</person>

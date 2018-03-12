@@ -1,0 +1,9 @@
+{
+  "name" : "bill",
+  "age" : 1,
+  "active" : true,
+  "sports" : [
+    "football", "baseball"
+  ],
+  "friend" : null
+}
