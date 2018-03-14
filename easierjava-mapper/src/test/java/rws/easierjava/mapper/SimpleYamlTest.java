@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import rws.easierjava.test.TestHelper;
 
-public class SimpleJsonTest {
+public class SimpleYamlTest {
 
 	@Test
 	public void testObjectToString() {
@@ -23,23 +23,8 @@ public class SimpleJsonTest {
 		input.setName("bill");
 		input.setSports(Arrays.asList("football", "baseball"));
 
-		String txt = SimpleJson.toString(input);
-
-		Person output = SimpleJson.toObject(txt, Person.class);
-
-		Assert.assertThat(output.getFriend(), IsNull.nullValue());
-		Assert.assertThat(output.getName(), Is.is("bill"));
-		Assert.assertThat(output.getActive(), Is.is(true));
-		Assert.assertThat(output.getAge(), Is.is(1));
-		Assert.assertThat(output.getSports().get(0), Is.is("football"));
-		Assert.assertThat(output.getSports().get(1), Is.is("baseball"));
-	}
-
-	@Test
-	public void testStringToObject() throws IOException {
-		String txt = TestHelper.readResourceFile("Person.json");
-
-		Person output = SimpleJson.toObject(txt, Person.class);
+		String txt = SimpleYaml.toString(input);
+		Person output = SimpleYaml.toObject(txt, Person.class);
 
 		Assert.assertThat(output.getFriend(), IsNull.nullValue());
 		Assert.assertThat(output.getName(), Is.is("bill"));
@@ -51,8 +36,8 @@ public class SimpleJsonTest {
 
 	@Test
 	public void testStringToJsonNode() throws IOException {
-		String txt = TestHelper.readResourceFile("Person.json");
-		JsonNode output = SimpleJson.toJsonNode(txt);
+		String txt = TestHelper.readResourceFile("Person.yaml");
+		JsonNode output = SimpleYaml.toJsonNode(txt);
 
 		Assert.assertThat(output.path("friend").textValue(), IsNull.nullValue());
 		Assert.assertThat(output.path("name").textValue(), Is.is("bill"));

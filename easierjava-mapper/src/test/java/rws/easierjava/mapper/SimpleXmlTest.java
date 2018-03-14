@@ -46,4 +46,5 @@ public class SimpleXmlTest {
 		Assert.assertThat(output.getSports().get(0), Is.is("football"));
 		Assert.assertThat(output.getSports().get(1), Is.is("baseball"));
 	}
+
 }

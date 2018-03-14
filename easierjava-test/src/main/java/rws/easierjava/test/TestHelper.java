@@ -124,7 +124,7 @@ public class TestHelper {
 		StringBuilder builder = new StringBuilder();
 		try (Stream<String> stream = Files
 				.lines(new File(TestHelper.class.getClassLoader().getResource(fileName).getFile()).toPath())) {
-			stream.forEach(builder::append);
+			stream.forEach(l -> builder.append(l).append("\n"));
 		}
 		return builder.toString();
 	}

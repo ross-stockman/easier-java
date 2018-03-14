@@ -3,11 +3,11 @@ package rws.easierjava.mapper;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public final class SimpleJson {
+public final class SimpleYaml {
 
-	private static final ObjectMapper MAPPER = ObjectMapperFactory.newObjectMapper("json");
+	private static final ObjectMapper MAPPER = ObjectMapperFactory.newObjectMapper("yaml");
 
-	private SimpleJson() {
+	private SimpleYaml() {
 	}
 
 	public static JsonNode toJsonNode(String str) {
@@ -21,4 +21,5 @@ public final class SimpleJson {
 	public static <T> T toObject(String str, Class<T> clazz) {
 		return ObjectMapperFactory.toObject(str, clazz, MAPPER);
 	}
+
 }

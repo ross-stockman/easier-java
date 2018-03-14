@@ -2,11 +2,18 @@ package rws.easierjava.mapper;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Person {
+	@JsonProperty
 	private String name;
+	@JsonProperty
 	private Integer age;
+	@JsonProperty
 	private Boolean active;
+	@JsonProperty
 	private List<String> sports;
+	@JsonProperty
 	private String friend;
 
 	public String getName() {

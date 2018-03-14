@@ -8,14 +8,12 @@ import org.hamcrest.core.IsNull;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import rws.easierjava.test.TestHelper;
 
-public class SimpleJsonTest {
+public class SimpleAvroTest {
 
 	@Test
-	public void testObjectToString() {
+	public void testObjectToString() throws IOException {
 		Person input = new Person();
 		input.setActive(true);
 		input.setAge(1);
@@ -23,9 +21,9 @@ public class SimpleJsonTest {
 		input.setName("bill");
 		input.setSports(Arrays.asList("football", "baseball"));
 
-		String txt = SimpleJson.toString(input);
+		byte[] txt = SimpleAvro.toBytes(input);
 
-		Person output = SimpleJson.toObject(txt, Person.class);
+		Person output = SimpleAvro.toObject(txt, Person.class);
 
 		Assert.assertThat(output.getFriend(), IsNull.nullValue());
 		Assert.assertThat(output.getName(), Is.is("bill"));
@@ -37,9 +35,9 @@ public class SimpleJsonTest {
 
 	@Test
 	public void testStringToObject() throws IOException {
-		String txt = TestHelper.readResourceFile("Person.json");
+		String txt = TestHelper.readResourceFile("Person.avro");
 
-		Person output = SimpleJson.toObject(txt, Person.class);
+		Person output = SimpleAvro.toObject(txt.getBytes(), Person.class);
 
 		Assert.assertThat(output.getFriend(), IsNull.nullValue());
 		Assert.assertThat(output.getName(), Is.is("bill"));
@@ -47,18 +45,5 @@ public class SimpleJsonTest {
 		Assert.assertThat(output.getAge(), Is.is(1));
 		Assert.assertThat(output.getSports().get(0), Is.is("football"));
 		Assert.assertThat(output.getSports().get(1), Is.is("baseball"));
-	}
-
-	@Test
-	public void testStringToJsonNode() throws IOException {
-		String txt = TestHelper.readResourceFile("Person.json");
-		JsonNode output = SimpleJson.toJsonNode(txt);
-
-		Assert.assertThat(output.path("friend").textValue(), IsNull.nullValue());
-		Assert.assertThat(output.path("name").textValue(), Is.is("bill"));
-		Assert.assertThat(output.path("active").asBoolean(), Is.is(true));
-		Assert.assertThat(output.path("age").asInt(), Is.is(1));
-		Assert.assertThat(output.path("sports").path(0).textValue(), Is.is("football"));
-		Assert.assertThat(output.path("sports").path(1).textValue(), Is.is("baseball"));
 	}
 }
