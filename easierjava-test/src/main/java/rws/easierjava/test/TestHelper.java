@@ -144,4 +144,5 @@ public class TestHelper {
 	public static interface Executable {
 		void execute() throws Throwable; // NOSONAR
 	}
+
 }

@@ -12,18 +12,24 @@ public class Random {
 		return UUID.randomUUID().toString();
 	}
 
-	public static int getInt() {
-		return getInt(Integer.MIN_VALUE, Integer.MAX_VALUE);
-	}
-
+	/**
+	 * @param min
+	 *            minimum boundary (inclusive)
+	 * @param max
+	 *            maximum boundary (exclusive)
+	 * @return
+	 */
 	public static int getInt(int min, int max) {
 		return ThreadLocalRandom.current().nextInt(min, max);
 	}
 
-	public static long getLong() {
-		return getLong(Long.MIN_VALUE, Long.MAX_VALUE);
-	}
-
+	/**
+	 * @param min
+	 *            minimum boundary (inclusive)
+	 * @param max
+	 *            maximum boundary (exclusive)
+	 * @return
+	 */
 	public static long getLong(long min, long max) {
 		return ThreadLocalRandom.current().nextLong(min, max);
 	}

@@ -34,12 +34,13 @@ public class SimpleQueryExecutorTest {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		Mockito.when(dataSource.getConnection()).thenReturn(connection);
+
 		systemUnderTest = new SimpleQueryExecutor<>(dataSource);
 	}
 
 	@Test
 	public void testQueryNoParams() throws Throwable {
+		Mockito.when(dataSource.getConnection()).thenReturn(connection);
 		Mockito.when(connection.prepareStatement(Mockito.anyString())).thenReturn(statement);
 		Mockito.when(statement.executeQuery()).thenReturn(resultSet);
 		Mockito.when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
@@ -47,7 +48,7 @@ public class SimpleQueryExecutorTest {
 
 		RowMapper<Integer> rowMapper = r -> r.getInt(1);
 
-		List<Integer> result = systemUnderTest.query("query", rowMapper);
+		List<Integer> result = systemUnderTest.query("query", null, rowMapper);
 		Assert.assertThat(result.size(), Is.is(3));
 		TestHelper.assertAll(() -> Assert.assertThat(result.get(0), Is.is(10)),
 				() -> Assert.assertThat(result.get(1), Is.is(20)), () -> Assert.assertThat(result.get(2), Is.is(30)));
@@ -60,6 +61,7 @@ public class SimpleQueryExecutorTest {
 
 	@Test
 	public void testQueryNoParamsNoResults() throws SQLException {
+		Mockito.when(dataSource.getConnection()).thenReturn(connection);
 		Mockito.when(connection.prepareStatement(Mockito.anyString())).thenReturn(statement);
 		Mockito.when(statement.executeQuery()).thenReturn(resultSet);
 		Mockito.when(resultSet.next()).thenReturn(false);
@@ -69,7 +71,7 @@ public class SimpleQueryExecutorTest {
 			return null;
 		};
 
-		List<Integer> result = systemUnderTest.query("query", rowMapper);
+		List<Integer> result = systemUnderTest.query("query", null, rowMapper);
 		Assert.assertThat(result.size(), Is.is(0));
 
 		Mockito.verify(resultSet).close();
@@ -80,6 +82,7 @@ public class SimpleQueryExecutorTest {
 
 	@Test
 	public void testQueryOneParam() throws Throwable {
+		Mockito.when(dataSource.getConnection()).thenReturn(connection);
 		Mockito.when(connection.prepareStatement(Mockito.anyString())).thenReturn(statement);
 		Mockito.when(statement.executeQuery()).thenReturn(resultSet);
 		Mockito.when(resultSet.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
@@ -97,4 +100,5 @@ public class SimpleQueryExecutorTest {
 		Mockito.verify(connection).close();
 
 	}
+
 }

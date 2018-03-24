@@ -23,5 +23,11 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.2.3</version>
 		</dependency>
+		<dependency>
+			<groupId>rws</groupId>
+			<artifactId>easierjava-test</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

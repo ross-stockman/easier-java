@@ -52,7 +52,7 @@ public class ComplexQueryExecutorTest {
 			return builder.toString();
 		};
 
-		String result = systemUnderTest.query("query", resultSetExtractor);
+		String result = systemUnderTest.query("query", null, resultSetExtractor);
 		Assert.assertThat(result, Is.is("102030"));
 
 		Mockito.verify(resultSet).close();
@@ -75,7 +75,7 @@ public class ComplexQueryExecutorTest {
 			return builder.toString();
 		};
 
-		String result = systemUnderTest.query("query", resultSetExtractor);
+		String result = systemUnderTest.query("query", null, resultSetExtractor);
 		Assert.assertThat(result, Is.is(""));
 
 		Mockito.verify(resultSet).close();
@@ -106,4 +106,5 @@ public class ComplexQueryExecutorTest {
 		Mockito.verify(statement).close();
 		Mockito.verify(connection).close();
 	}
+
 }

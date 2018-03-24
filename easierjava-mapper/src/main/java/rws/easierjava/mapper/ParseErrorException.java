@@ -4,8 +4,8 @@ public class ParseErrorException extends RuntimeException {
 
 	private static final long serialVersionUID = 7237824585824839818L;
 
-	public ParseErrorException(String msg, Throwable t) {
-		super(msg, t);
+	public ParseErrorException(Throwable t) {
+		super("parse error", t);
 	}
 
 }

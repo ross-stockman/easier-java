@@ -71,7 +71,7 @@ public final class ObjectMapperFactory {
 		try {
 			return mapper.readTree(str);
 		} catch (IOException e) {
-			throw new ParseErrorException("parse error", e);
+			throw new ParseErrorException(e);
 		}
 	}
 
@@ -79,7 +79,7 @@ public final class ObjectMapperFactory {
 		try {
 			return mapper.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
-			throw new ParseErrorException("parse error", e);
+			throw new ParseErrorException(e);
 		}
 	}
 
@@ -87,7 +87,7 @@ public final class ObjectMapperFactory {
 		try {
 			return mapper.readValue(str, clazz);
 		} catch (IOException e) {
-			throw new ParseErrorException("parse error", e);
+			throw new ParseErrorException(e);
 		}
 	}
 

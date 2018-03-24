@@ -20,7 +20,7 @@ public final class SimpleAvro {
 			mapper.acceptJsonFormatVisitor(obj.getClass(), gen);
 			return mapper.writer(gen.getGeneratedSchema()).writeValueAsBytes(obj);
 		} catch (JsonProcessingException e) {
-			throw new ParseErrorException("parse error", e);
+			throw new ParseErrorException(e);
 		}
 	}
 
@@ -31,7 +31,7 @@ public final class SimpleAvro {
 			mapper.acceptJsonFormatVisitor(clazz, gen);
 			return mapper.readerFor(clazz).with(gen.getGeneratedSchema()).readValue(bytes);
 		} catch (IOException e) {
-			throw new ParseErrorException("parse error", e);
+			throw new ParseErrorException(e);
 		}
 	}
 
@@ -42,7 +42,7 @@ public final class SimpleAvro {
 			mapper.acceptJsonFormatVisitor(clazz, gen);
 			return gen.getGeneratedSchema().getAvroSchema();
 		} catch (JsonProcessingException e) {
-			throw new ParseErrorException("parse error", e);
+			throw new ParseErrorException(e);
 		}
 	}
 
