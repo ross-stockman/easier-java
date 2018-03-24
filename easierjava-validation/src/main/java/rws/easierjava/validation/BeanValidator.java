@@ -14,8 +14,6 @@ import org.slf4j.LoggerFactory;
 
 public class BeanValidator {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BeanValidator.class);
-
 	private final Consumer<Violation> violationHandler;
 
 	public BeanValidator(Consumer<Violation> violationHandler) {
@@ -29,8 +27,7 @@ public class BeanValidator {
 
 		Set<ConstraintViolation<Object>> violations = validator.validate(obj);
 		for (ConstraintViolation<Object> violation : violations) {
-
-			Violation v = new Violation(violation.getRootBeanClass(), violation.getPropertyPath(),
+			Violation v = new Violation(violation.getRootBeanClass(), violation.getLeafBean().getClass(), violation.getPropertyPath(),
 					violation.getMessage(), violation.getInvalidValue(), violation.getMessageTemplate());
 			violationHandler.accept(v);
 		}
@@ -38,26 +35,32 @@ public class BeanValidator {
 	}
 
 	public static class Violation {
+		private final Class<?> rootType;
 		private final Class<?> type;
-		private final Path field;
+		private final Path propertyPath;
 		private final String message;
 		private final Object invalidValue;
 		private final String messageTemplate;
 
-		public Violation(Class<?> type, Path field, String message, Object invalidValue, String messageTemplate) {
+		public Violation(Class<?> rootType, Class<?> type, Path propertyPath, String message, Object invalidValue, String messageTemplate) {
+			this.rootType = rootType;
 			this.type = type;
-			this.field = field;
+			this.propertyPath = propertyPath;
 			this.message = message;
 			this.invalidValue = invalidValue;
 			this.messageTemplate = messageTemplate;
+		}
+
+		public Class<?> getRootType() {
+			return rootType;
 		}
 
 		public Class<?> getType() {
 			return type;
 		}
 
-		public Path getField() {
-			return field;
+		public Path getPropertyPath() {
+			return propertyPath;
 		}
 
 		public String getMessage() {
@@ -71,6 +74,15 @@ public class BeanValidator {
 		public String getMessageTemplate() {
 			return messageTemplate;
 		}
+
+		@Override
+		public String toString() {
+			return "Violation [rootType=" + rootType + ", type=" + type + ", propertyPath=" + propertyPath
+					+ ", message=" + message + ", invalidValue=" + invalidValue + ", messageTemplate=" + messageTemplate
+					+ "]";
+		}
+
+		
 
 	}
 }
