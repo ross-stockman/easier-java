@@ -9,9 +9,6 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class BeanValidator {
 
 	private final Consumer<Violation> violationHandler;
@@ -27,8 +24,9 @@ public class BeanValidator {
 
 		Set<ConstraintViolation<Object>> violations = validator.validate(obj);
 		for (ConstraintViolation<Object> violation : violations) {
-			Violation v = new Violation(violation.getRootBeanClass(), violation.getLeafBean().getClass(), violation.getPropertyPath(),
-					violation.getMessage(), violation.getInvalidValue(), violation.getMessageTemplate());
+			Violation v = new Violation(violation.getRootBeanClass(), violation.getLeafBean().getClass(),
+					violation.getPropertyPath(), violation.getMessage(), violation.getInvalidValue(),
+					violation.getMessageTemplate());
 			violationHandler.accept(v);
 		}
 		return violations.isEmpty();
@@ -42,7 +40,8 @@ public class BeanValidator {
 		private final Object invalidValue;
 		private final String messageTemplate;
 
-		public Violation(Class<?> rootType, Class<?> type, Path propertyPath, String message, Object invalidValue, String messageTemplate) {
+		public Violation(Class<?> rootType, Class<?> type, Path propertyPath, String message, Object invalidValue,
+				String messageTemplate) {
 			this.rootType = rootType;
 			this.type = type;
 			this.propertyPath = propertyPath;
@@ -74,15 +73,6 @@ public class BeanValidator {
 		public String getMessageTemplate() {
 			return messageTemplate;
 		}
-
-		@Override
-		public String toString() {
-			return "Violation [rootType=" + rootType + ", type=" + type + ", propertyPath=" + propertyPath
-					+ ", message=" + message + ", invalidValue=" + invalidValue + ", messageTemplate=" + messageTemplate
-					+ "]";
-		}
-
-		
 
 	}
 }
