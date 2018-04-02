@@ -1,9 +1,11 @@
-package rws.easierjava.core;
+package rws.easierjava.jasypt;
 
 import java.util.regex.Pattern;
 
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.properties.PropertyValueEncryptionUtils;
+
+import rws.easierjava.core.PropertyResolver;
 
 public class EncryptablePropertyResolver extends PropertyResolver {
 

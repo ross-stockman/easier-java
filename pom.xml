@@ -24,6 +24,7 @@
 		<module>easierjava-test</module>
 		<module>easierjava-core</module>
 		<module>easierjava-validation</module>
+		<module>easierjava-jasypt</module>
 	</modules>
 
 	<build>
