@@ -8,6 +8,9 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import rws.easierjava.core.annotations.Nullable;
+import rws.easierjava.core.assertions.Assert;
+
 public class PropertyResolver {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PropertyResolver.class);

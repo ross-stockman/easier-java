@@ -3,6 +3,8 @@ package rws.easierjava.core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import rws.easierjava.core.annotations.Nullable;
+
 public class ClassUtils {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtils.class);

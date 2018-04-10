@@ -3,9 +3,9 @@ package rws.easierjava.jasypt;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;
 
-import rws.easierjava.core.Nullable;
 import rws.easierjava.core.PropertyResolver;
 import rws.easierjava.core.PropertyResolver.Mode;
+import rws.easierjava.core.annotations.Nullable;
 
 public class SimplePropertyResolver {
 
