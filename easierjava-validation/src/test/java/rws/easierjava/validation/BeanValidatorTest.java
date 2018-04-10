@@ -17,12 +17,13 @@ import org.hamcrest.core.IsNull;
 import org.junit.Assert;
 import org.junit.Test;
 
+import rws.easierjava.test.TestHelper;
 import rws.easierjava.validation.BeanValidator.Violation;
 
 public class BeanValidatorTest {
 
 	@Test
-	public void testIsValid() {
+	public void testIsValid() throws Throwable {
 		Person person = new Person();
 		person.setFriend(new Friend());
 		person.getFriend().setNextFavNum(1000);
@@ -39,60 +40,75 @@ public class BeanValidatorTest {
 		});
 
 		Assert.assertThat(violations.size(), Is.is(7));
+		TestHelper.assertAll(() -> Assert.assertThat(violations.get("name"), IsNull.notNullValue()),
+				() -> Assert.assertThat(violations.get("name").getMessage(), Is.is("must not be null")),
+				() -> Assert.assertThat(violations.get("name").getInvalidValue(), IsNull.nullValue()),
+				() -> Assert.assertThat(violations.get("name").getType().getName(), Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("name").getRootType().getName(), Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("name").getMessageTemplate(),
+						Is.is("{javax.validation.constraints.NotNull.message}")),
 
-		Assert.assertThat(violations.get("name"), IsNull.notNullValue());
-		Assert.assertThat(violations.get("name").getMessage(), Is.is("must not be null"));
-		Assert.assertThat(violations.get("name").getInvalidValue(), IsNull.nullValue());
-		Assert.assertThat(violations.get("name").getType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("name").getRootType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("name").getMessageTemplate(),
-				Is.is("{javax.validation.constraints.NotNull.message}"));
+				() -> Assert.assertThat(violations.get("friend.name"), IsNull.notNullValue()),
+				() -> Assert.assertThat(violations.get("friend.name").getMessage(), Is.is("must not be null")),
+				() -> Assert.assertThat(violations.get("friend.name").getInvalidValue(), IsNull.nullValue()),
+				() -> Assert.assertThat(violations.get("friend.name").getType().getName(),
+						Is.is(Friend.class.getName())),
+				() -> Assert.assertThat(violations.get("friend.name").getRootType().getName(),
+						Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("friend.name").getMessageTemplate(),
+						Is.is("{javax.validation.constraints.NotNull.message}")),
 
-		Assert.assertThat(violations.get("friend.name"), IsNull.notNullValue());
-		Assert.assertThat(violations.get("friend.name").getMessage(), Is.is("must not be null"));
-		Assert.assertThat(violations.get("friend.name").getInvalidValue(), IsNull.nullValue());
-		Assert.assertThat(violations.get("friend.name").getType().getName(), Is.is(Friend.class.getName()));
-		Assert.assertThat(violations.get("friend.name").getRootType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("friend.name").getMessageTemplate(),
-				Is.is("{javax.validation.constraints.NotNull.message}"));
+				() -> Assert.assertThat(violations.get("favNum"), IsNull.notNullValue()),
+				() -> Assert.assertThat(violations.get("favNum").getMessage(), Is.is("Must have a favorite number")),
+				() -> Assert.assertThat(violations.get("favNum").getInvalidValue(), IsNull.nullValue()),
+				() -> Assert.assertThat(violations.get("favNum").getType().getName(), Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("favNum").getRootType().getName(),
+						Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("favNum").getMessageTemplate(),
+						Is.is("Must have a favorite number")),
 
-		Assert.assertThat(violations.get("favNum"), IsNull.notNullValue());
-		Assert.assertThat(violations.get("favNum").getMessage(), Is.is("Must have a favorite number"));
-		Assert.assertThat(violations.get("favNum").getInvalidValue(), IsNull.nullValue());
-		Assert.assertThat(violations.get("favNum").getType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("favNum").getRootType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("favNum").getMessageTemplate(), Is.is("Must have a favorite number"));
+				() -> Assert.assertThat(violations.get("friend.favNum"), IsNull.notNullValue()),
+				() -> Assert.assertThat(violations.get("friend.favNum").getMessage(),
+						Is.is("Must have a favorite number")),
+				() -> Assert.assertThat(violations.get("friend.favNum").getInvalidValue(), IsNull.nullValue()),
+				() -> Assert.assertThat(violations.get("friend.favNum").getType().getName(),
+						Is.is(Friend.class.getName())),
+				() -> Assert.assertThat(violations.get("friend.favNum").getRootType().getName(),
+						Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("friend.favNum").getMessageTemplate(),
+						Is.is("Must have a favorite number")),
 
-		Assert.assertThat(violations.get("friend.favNum"), IsNull.notNullValue());
-		Assert.assertThat(violations.get("friend.favNum").getMessage(), Is.is("Must have a favorite number"));
-		Assert.assertThat(violations.get("friend.favNum").getInvalidValue(), IsNull.nullValue());
-		Assert.assertThat(violations.get("friend.favNum").getType().getName(), Is.is(Friend.class.getName()));
-		Assert.assertThat(violations.get("friend.favNum").getRootType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("friend.favNum").getMessageTemplate(), Is.is("Must have a favorite number"));
+				() -> Assert.assertThat(violations.get("nextFavNum"), IsNull.notNullValue()),
+				() -> Assert.assertThat(violations.get("nextFavNum").getMessage(),
+						Is.is("Must be a number greater than 1")),
+				() -> Assert.assertThat(violations.get("nextFavNum").getInvalidValue(), Is.is(-5)),
+				() -> Assert.assertThat(violations.get("nextFavNum").getType().getName(),
+						Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("nextFavNum").getRootType().getName(),
+						Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("nextFavNum").getMessageTemplate(),
+						Is.is("{javax.validation.constraints.Min.message}")),
 
-		Assert.assertThat(violations.get("nextFavNum"), IsNull.notNullValue());
-		Assert.assertThat(violations.get("nextFavNum").getMessage(), Is.is("Must be a number greater than 1"));
-		Assert.assertThat(violations.get("nextFavNum").getInvalidValue(), Is.is(-5));
-		Assert.assertThat(violations.get("nextFavNum").getType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("nextFavNum").getRootType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("nextFavNum").getMessageTemplate(),
-				Is.is("{javax.validation.constraints.Min.message}"));
+				() -> Assert.assertThat(violations.get("friend.nextFavNum"), IsNull.notNullValue()),
+				() -> Assert.assertThat(violations.get("friend.nextFavNum").getMessage(),
+						Is.is("Must be a number less than 100")),
+				() -> Assert.assertThat(violations.get("friend.nextFavNum").getInvalidValue(), Is.is(1000)),
+				() -> Assert.assertThat(violations.get("friend.nextFavNum").getType().getName(),
+						Is.is(Friend.class.getName())),
+				() -> Assert.assertThat(violations.get("friend.nextFavNum").getRootType().getName(),
+						Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("friend.nextFavNum").getMessageTemplate(),
+						Is.is("Must be a number less than {value}")),
 
-		Assert.assertThat(violations.get("friend.nextFavNum"), IsNull.notNullValue());
-		Assert.assertThat(violations.get("friend.nextFavNum").getMessage(), Is.is("Must be a number less than 100"));
-		Assert.assertThat(violations.get("friend.nextFavNum").getInvalidValue(), Is.is(1000));
-		Assert.assertThat(violations.get("friend.nextFavNum").getType().getName(), Is.is(Friend.class.getName()));
-		Assert.assertThat(violations.get("friend.nextFavNum").getRootType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("friend.nextFavNum").getMessageTemplate(),
-				Is.is("Must be a number less than {value}"));
-
-		Assert.assertThat(violations.get("moreNums"), IsNull.notNullValue());
-		Assert.assertThat(violations.get("moreNums").getMessage(), Is.is("Must be a size between 1 and 5"));
-		Assert.assertThat(violations.get("moreNums").getInvalidValue(),
-				Is.is(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9)));
-		Assert.assertThat(violations.get("moreNums").getType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("moreNums").getRootType().getName(), Is.is(Person.class.getName()));
-		Assert.assertThat(violations.get("moreNums").getMessageTemplate(), Is.is("{validation.size}"));
+				() -> Assert.assertThat(violations.get("moreNums"), IsNull.notNullValue()),
+				() -> Assert.assertThat(violations.get("moreNums").getMessage(),
+						Is.is("Must be a size between 1 and 5")),
+				() -> Assert.assertThat(violations.get("moreNums").getInvalidValue(),
+						Is.is(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9))),
+				() -> Assert.assertThat(violations.get("moreNums").getType().getName(), Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("moreNums").getRootType().getName(),
+						Is.is(Person.class.getName())),
+				() -> Assert.assertThat(violations.get("moreNums").getMessageTemplate(), Is.is("{validation.size}")));
 	}
 
 	public static class Person {

@@ -74,12 +74,5 @@ public class BeanValidator {
 			return messageTemplate;
 		}
 
-		@Override
-		public String toString() {
-			return "Violation [rootType=" + rootType + ", type=" + type + ", propertyPath=" + propertyPath
-					+ ", message=" + message + ", invalidValue=" + invalidValue + ", messageTemplate=" + messageTemplate
-					+ "]";
-		}
-
 	}
 }

@@ -16,6 +16,7 @@ public class ClassUtils {
 	 * 
 	 * @return
 	 */
+	@Nullable
 	public static ClassLoader getDefaultClassLoader(Object obj) {
 		ClassLoader classLoader = getClassClassLoader(obj.getClass());
 		if (classLoader != null) {
@@ -33,6 +34,7 @@ public class ClassUtils {
 	 * 
 	 * @return
 	 */
+	@Nullable
 	public static ClassLoader getDefaultClassLoader() {
 		ClassLoader classLoader = getThreadContextClassLoader();
 		if (classLoader != null) {
@@ -59,6 +61,7 @@ public class ClassUtils {
 	 *            Class for which ClassLoader to load
 	 * @return
 	 */
+	@Nullable
 	public static ClassLoader getClassClassLoader(Class<?> clazz) {
 		try {
 			return clazz.getClassLoader();
@@ -78,6 +81,7 @@ public class ClassUtils {
 	 * @see java.lang.Thread#getContextClassLoader()
 	 * @return ClassLoader or null
 	 */
+	@Nullable
 	public static ClassLoader getThreadContextClassLoader() {
 		try {
 			return Thread.currentThread().getContextClassLoader();
@@ -96,6 +100,7 @@ public class ClassUtils {
 	 * @see java.lang.ClassLoader#getSystemClassLoader()
 	 * @return ClassLoader or null
 	 */
+	@Nullable
 	public static ClassLoader getSystemClassLoader() {
 		try {
 			return ClassLoader.getSystemClassLoader();
