@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import rws.easierjava.core.Nullable;
+import rws.easierjava.core.annotations.Nullable;
 
 /**
  * This complex query executor will return the entire result as a single object

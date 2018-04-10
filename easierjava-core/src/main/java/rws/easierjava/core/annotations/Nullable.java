@@ -1,4 +1,4 @@
-package rws.easierjava.core;
+package rws.easierjava.core.annotations;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 

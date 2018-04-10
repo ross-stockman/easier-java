@@ -1,7 +1,9 @@
-package rws.easierjava.core;
+package rws.easierjava.core.assertions;
 
 import java.util.Optional;
 import java.util.function.Supplier;
+
+import rws.easierjava.core.annotations.Nullable;
 
 public class Assert {
 

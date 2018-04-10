@@ -3,6 +3,10 @@ package rws.easierjava.core;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
+import rws.easierjava.core.annotations.ThreadSafe;
+import rws.easierjava.core.annotations.ThreadSafe.IsThreadSafe;
+
+@ThreadSafe(IsThreadSafe.NO)
 public class Random {
 
 	private Random() {

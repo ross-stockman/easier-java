@@ -1,8 +1,9 @@
-package rws.easierjava.core;
+package rws.easierjava.core.assertions;
 
 import org.hamcrest.core.Is;
 import org.junit.Test;
 
+import rws.easierjava.core.assertions.Assert;
 import rws.easierjava.test.TestHelper;
 
 public class AssertTest {

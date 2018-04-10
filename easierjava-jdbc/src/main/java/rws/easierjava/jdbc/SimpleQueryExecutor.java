@@ -11,7 +11,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import rws.easierjava.core.Nullable;
+import rws.easierjava.core.annotations.Nullable;
 
 /**
  * This is a simple query executor that will return a list of {@code R} objects.
