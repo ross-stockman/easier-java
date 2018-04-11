@@ -62,4 +62,8 @@ public final class SimpleAvro {
 		}
 	}
 
+	public static Schema toSchema(String jsonSchema) {
+		return new Schema.Parser().setValidate(true).parse(jsonSchema);
+	}
+
 }
