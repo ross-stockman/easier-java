@@ -5,7 +5,9 @@ import java.io.IOException;
 import org.apache.avro.Schema;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.avro.AvroSchema;
 import com.fasterxml.jackson.dataformat.avro.schema.AvroSchemaGenerator;
 
 import rws.easierjava.core.annotations.Experimental;
@@ -33,6 +35,17 @@ public final class SimpleAvro {
 			final AvroSchemaGenerator gen = new AvroSchemaGenerator();
 			mapper.acceptJsonFormatVisitor(clazz, gen);
 			return mapper.readerFor(clazz).with(gen.getGeneratedSchema()).readValue(bytes);
+		} catch (IOException e) {
+			throw new ParseErrorException(e);
+		}
+	}
+
+	@Experimental
+	public static JsonNode toJsonNode(byte[] bytes, Schema schema) {
+		try {
+			final ObjectMapper mapper = ObjectMapperFactory.newObjectMapper("avro");
+			final AvroSchema avroSchema = new AvroSchema(schema);
+			return mapper.readerFor(JsonNode.class).with(avroSchema).readValue(bytes);
 		} catch (IOException e) {
 			throw new ParseErrorException(e);
 		}
