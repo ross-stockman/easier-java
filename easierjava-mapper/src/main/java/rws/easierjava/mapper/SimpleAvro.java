@@ -8,6 +8,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.avro.schema.AvroSchemaGenerator;
 
+import rws.easierjava.core.annotations.Experimental;
+
+@Experimental
 public final class SimpleAvro {
 
 	private SimpleAvro() {
