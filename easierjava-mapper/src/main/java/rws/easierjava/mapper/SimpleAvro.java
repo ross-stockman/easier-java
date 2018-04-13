@@ -28,6 +28,16 @@ public final class SimpleAvro {
 			throw new ParseErrorException(e);
 		}
 	}
+	
+	public static byte[] toBytes(JsonNode jsonNode, Schema schema) {
+		try {
+			final ObjectMapper mapper = ObjectMapperFactory.newObjectMapper("avro");
+			final AvroSchema avroSchema = new AvroSchema(schema);
+			return mapper.writer(avroSchema).writeValueAsBytes(jsonNode);
+		} catch (JsonProcessingException e) {
+			throw new ParseErrorException(e);
+		}
+	}
 
 	public static <T> T toObject(byte[] bytes, Class<T> clazz) {
 		try {
