@@ -9,11 +9,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import rws.easierjava.drivers.jms.activemq.ActivemqConnectionFactory;
-import rws.easierjava.messaging.MessagingException;
-import rws.easierjava.messaging.jms.ConnectionFactory;
-import rws.easierjava.messaging.jms.Consumer;
-import rws.easierjava.messaging.jms.LookupPolicy;
-import rws.easierjava.messaging.jms.Producer;
+import rws.easierjava.jms.MessagingException;
+import rws.easierjava.jms.ConnectionFactory;
+import rws.easierjava.jms.Consumer;
+import rws.easierjava.jms.LookupPolicy;
+import rws.easierjava.jms.Producer;
 
 public class Demo {
 

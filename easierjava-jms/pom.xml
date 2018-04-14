@@ -7,7 +7,7 @@
 		<artifactId>easierjava</artifactId>
 		<version>1.0.0</version>
 	</parent>
-	<artifactId>easierjava-messaging</artifactId>
+	<artifactId>easierjava-jms</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>rws</groupId>

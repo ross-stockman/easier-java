@@ -24,7 +24,7 @@
 		<module>easierjava-core</module>
 		<module>easierjava-validation</module>
 		<module>easierjava-jasypt</module>
-		<module>easierjava-messaging</module>
+		<module>easierjava-jms</module>
 	</modules>
 
 	<build>

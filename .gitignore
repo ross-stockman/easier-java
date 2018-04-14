@@ -371,3 +371,5 @@ gradle-app.setting
 mvnw
 mvnw.cmd
 *.m2*
+
+activemq-data/

@@ -1,9 +1,7 @@
-package rws.easierjava.messaging.jms;
+package rws.easierjava.jms;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;
-
-import rws.easierjava.messaging.MessagingException;
 
 public class ConnectionFactory {
 

@@ -1,4 +1,4 @@
-package rws.easierjava.messaging;
+package rws.easierjava.jms;
 
 public class MessagingException extends RuntimeException {
 

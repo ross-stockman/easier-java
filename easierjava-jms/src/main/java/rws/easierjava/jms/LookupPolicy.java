@@ -1,4 +1,4 @@
-package rws.easierjava.messaging.jms;
+package rws.easierjava.jms;
 
 import javax.jms.Destination;
 

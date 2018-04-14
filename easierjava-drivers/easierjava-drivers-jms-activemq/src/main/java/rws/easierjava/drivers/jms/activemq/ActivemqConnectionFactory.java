@@ -2,7 +2,7 @@ package rws.easierjava.drivers.jms.activemq;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-import rws.easierjava.messaging.jms.ConnectionFactory;
+import rws.easierjava.jms.ConnectionFactory;
 
 public class ActivemqConnectionFactory extends ConnectionFactory {
 
