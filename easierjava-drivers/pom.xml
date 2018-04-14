@@ -12,6 +12,7 @@
   	<module>easierjava-drivers-jdbc-oracle</module>
   	<module>easierjava-drivers-jdbc-hive</module>
   	<module>easierjava-drivers-jdbc-mysql</module>
+  	<module>easierjava-drivers-jms-activemq</module>
   </modules>
   <dependencies>
   	<dependency>

@@ -8,21 +8,7 @@ import java.sql.Connection;
  */
 public abstract class DataSource {
 
-	private static final String HIVE_DRIVER = "org.apache.hive.jdbc.HiveDriver";
-
 	public abstract Connection getConnection();
-
-	/**
-	 * Factory method to create hive datasource
-	 * 
-	 * @param connectionString
-	 * @param username
-	 * @param password
-	 * @return
-	 */
-	public static DataSource createHiveDataSource(String connectionString, String username, String password) {
-		return new DriverDataSource(connectionString, username, password, HIVE_DRIVER);
-	}
 
 	protected static class DataSourceException extends RuntimeException {
 

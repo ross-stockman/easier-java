@@ -7,4 +7,8 @@ public class MessagingException extends RuntimeException {
 	public MessagingException(String msg, Throwable t) {
 		super(msg, t);
 	}
+
+	public MessagingException(Throwable t) {
+		super(t);
+	}
 }

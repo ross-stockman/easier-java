@@ -3,26 +3,27 @@ package rws.easierjava.messaging.jms;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.MessageProducer;
+import javax.jms.MessageConsumer;
 import javax.jms.Session;
+import javax.jms.TextMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import rws.easierjava.messaging.MessagingException;
 
-public class Producer {
+public class Consumer {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(Producer.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Consumer.class);
 
 	private ConnectionFactory connectionFactory;
 	private Connection connection;
 	private Session session;
-	private MessageProducer messageProducer;
+	private MessageConsumer messageConsumer;
 	private Destination destination;
 	private LookupPolicy lookupPolicy;
 
-	public Producer(ConnectionFactory connectionFactory, LookupPolicy lookupPolicy) {
+	public Consumer(ConnectionFactory connectionFactory, LookupPolicy lookupPolicy) {
 		this.connectionFactory = connectionFactory;
 		this.lookupPolicy = lookupPolicy;
 		initialize();
@@ -35,7 +36,7 @@ public class Producer {
 			connection = connectionFactory.getConnection();
 			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			destination = lookupPolicy.lookup();
-			messageProducer = session.createProducer(destination);
+			messageConsumer = session.createConsumer(destination);
 			connection.start();
 		} catch (JMSException e) {
 			throw new MessagingException("Failed to connect.", e);
@@ -67,9 +68,27 @@ public class Producer {
 		}
 	}
 
-	public void sendMessage(String msg) {
+	public String receiveMessage(long timeout) {
 		try {
-			messageProducer.send(session.createTextMessage(msg));
+			TextMessage message = (TextMessage) messageConsumer.receive(timeout);
+			if (message != null) {
+				return message.getText();
+			} else {
+				return null;
+			}
+		} catch (JMSException e) {
+			throw new MessagingException("Failed to send message.", e);
+		}
+	}
+
+	public String receiveMessage() {
+		try {
+			TextMessage message = (TextMessage) messageConsumer.receive();
+			if (message != null) {
+				return message.getText();
+			} else {
+				return null;
+			}
 		} catch (JMSException e) {
 			throw new MessagingException("Failed to send message.", e);
 		}
