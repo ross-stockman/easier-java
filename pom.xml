@@ -20,7 +20,6 @@
 
 	<modules>
 		<module>easierjava-mapper</module>
-		<module>easierjava-jdbc</module>
 		<module>easierjava-test</module>
 		<module>easierjava-core</module>
 		<module>easierjava-validation</module>

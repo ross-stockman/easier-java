@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>rws</groupId>
+    <artifactId>easierjava</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>easierjava-drivers</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>easierjava-drivers-jdbc</module>
+  	<module>easierjava-drivers-jdbc-oracle</module>
+  	<module>easierjava-drivers-jdbc-hive</module>
+  	<module>easierjava-drivers-jdbc-mysql</module>
+  </modules>
+  <dependencies>
+  	<dependency>
+  		<groupId>rws</groupId>
+  		<artifactId>easierjava-core</artifactId>
+  		<version>1.0.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>rws</groupId>
+  		<artifactId>easierjava-test</artifactId>
+  		<version>1.0.0</version>
+  		<scope>test</scope>
+  	</dependency>
+  </dependencies>
+</project>
