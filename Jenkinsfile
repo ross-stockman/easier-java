@@ -1,9 +1,11 @@
 pipeline {
     agent any
+    input id: 'Repo', message: 'repo name?', ok: 'generate', parameters: [string(defaultValue: '', description: '', name: 'repo_name', trim: true)]
     stages {
         stage ('Compile Stage') {
             steps {
                 withMaven(maven : 'maven_local') {
+                	sh 'echo ${env.repo_name}'
                     sh 'mvn clean compile'
                 }
             }
