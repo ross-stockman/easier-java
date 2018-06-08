@@ -1,8 +1,9 @@
 pipeline {
     agent any
-    userIntpu = input(
+    def userInput = input(
     	id: 'Repo', message: 'repo name?', ok: 'generate', parameters: [string(defaultValue: '', description: '', name: 'repo_name', trim: true)]
     )
+    echo (userInput)
     stages {
         stage ('Compile Stage') {
             steps {
